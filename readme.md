@@ -69,7 +69,7 @@ extension Environment {
 var Current = Environment.live
 
 // you can swap out your own mock implementation:
-Current.sendGridClient = .init(send: { _, _ in throw SomeError("should not be called") })
+Current.sendGridClient.send = { _, _ in fatalError("shouldn't be called") }
 ```
 
 ## Installation
