@@ -76,13 +76,22 @@ Current.sendGridClient = .init(send: { _, _ in throw SomeError("should not be ca
 
 Use SPM:
 
-```swift
-// Package.swift
-// [...]
-// in "DEPENDENCIES"
-  .package(url: "https://github.com/jaredh159/x-sendgrid.git", from: "1.0.0")
-// [...]
-// in "TARGETS"
-  .product(name: "XSendGrid", package: "x-sendgrid"),
-// [...]
+```diff.swift
+// swift-tools-version:5.5
+import PackageDescription
+
+let package = Package(
+  name: "RadProject",
+  products: [
+    .library(name: "RadProject", targets: ["RadProject"]),
+  ],
+  dependencies: [
++   .package(url: "https://github.com/jaredh159/x-sendgrid.git", from: "1.0.0")
+  ],
+  targets: [
+    .target(name: "RadProject", dependencies: [
++     .product(name: "XSendGrid", package: "x-sendgrid"),
+    ]),
+  ]
+)
 ```

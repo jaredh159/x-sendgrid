@@ -16,7 +16,7 @@ private func send(email: SendGrid.Email, apiKey: String) async throws -> Data? {
   return response.statusCode == 202 ? nil : data
 }
 
-// estensions
+// extensions
 
 public extension SendGrid.Client {
   static var live: Self = .init(send: send(email:apiKey:))
