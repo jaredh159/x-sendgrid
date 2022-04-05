@@ -76,7 +76,7 @@ Current.sendGridClient.send = { _, _ in fatalError("shouldn't be called") }
 
 Use SPM:
 
-```diff.swift
+```diff
 // swift-tools-version:5.5
 import PackageDescription
 
