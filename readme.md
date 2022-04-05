@@ -16,8 +16,9 @@ let email = SendGrid.Email(
   html: "<h1>You're invited!</h1>"
 )
 
+let client = SendGrid.Client.live
 let apiKey = "sg_123sosecret"
-let responseData = try await SendGrid.Client().send(email, apiKey)
+let responseData = try await client.send(email, apiKey)
 ```
 
 Send a _plain text_ email:
@@ -31,7 +32,7 @@ let email = SendGrid.Email(
 )
 
 // [...]
-let responseData = try await SendGrid.Client().send(email, apiKey)
+let responseData = try await client.send(email, apiKey)
 ```
 
 Add an _attachment_:
@@ -43,7 +44,7 @@ var email = SendGrid.Email(/* [...] */)
 email.attachments = [.init(data: fileData, filename: "ms-fluff.gif")]
 
 // [...]
-let responseData = try await SendGrid.Client().send(email, apiKey)
+let responseData = try await client.send(email, apiKey)
 ```
 
 ## Environment/Mocking/Testing

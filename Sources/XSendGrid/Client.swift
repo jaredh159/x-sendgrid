@@ -3,6 +3,10 @@ import XHttp
 
 public extension SendGrid {
   struct Client {
+    public init(send: @escaping (SendGrid.Email, String) async throws -> Data?) {
+      self.send = send
+    }
+
     public var send = send(email:apiKey:)
   }
 }
