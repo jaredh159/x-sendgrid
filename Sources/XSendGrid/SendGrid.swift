@@ -1,6 +1,5 @@
 import Foundation
 import NonEmpty
-import XBase64
 
 public enum SendGrid {
   public struct EmailAddress: Encodable, ExpressibleByStringLiteral {
@@ -24,17 +23,22 @@ public enum SendGrid {
     }
 
     public struct Attachment: Encodable {
-      public var content: Base64EncodedString
-      public var filename: String
       public var type = "text/plain"
+      public var filename: String
+      public var content: String // base64 encoded
 
-      public init(content: Base64EncodedString, filename: String) {
-        self.content = content
+      public init(plainTextContent plainText: String, filename: String) {
+        content = plainText.data(using: .utf8)?.base64EncodedString() ?? "<encoding error>"
+        self.filename = filename
+      }
+
+      public init(base64EncodedTextContent encodedText: String, filename: String) {
+        content = encodedText
         self.filename = filename
       }
 
       public init(data: Data, filename: String) throws {
-        content = try Base64EncodedString(data: data)
+        content = data.base64EncodedString()
         self.filename = filename
       }
     }
