@@ -15,7 +15,8 @@ private func send(email: SendGrid.Email, apiKey: String) async throws -> Data? {
   let (data, response) = try await HTTP.postJson(
     email,
     to: "https://api.sendgrid.com/v3/mail/send",
-    auth: .bearer(apiKey)
+    auth: .bearer(apiKey),
+    keyEncodingStrategy: .convertToSnakeCase
   )
   return response.statusCode == 202 ? nil : data
 }
